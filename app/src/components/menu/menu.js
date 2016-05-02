@@ -43,48 +43,15 @@ function createMenu({nativefierVersion, appQuit, zoomIn, zoomOut, goBack, goForw
                     role: 'copy'
                 },
                 {
-                    label: 'Copy Current URL',
-                    accelerator: 'CmdOrCtrl+L',
-                    click: () => {
-                        const currentURL = getCurrentUrl();
-                        clipboard.writeText(currentURL);
-                    }
-                },
-                {
                     label: 'Paste',
                     accelerator: 'CmdOrCtrl+V',
                     role: 'paste'
-                },
-                {
-                    label: 'Select All',
-                    accelerator: 'CmdOrCtrl+A',
-                    role: 'selectall'
-                },
-                {
-                    label: 'Clear App Data',
-                    click: () => {
-                        clearAppData();
-                    }
                 }
             ]
         },
         {
             label: 'View',
             submenu: [
-                {
-                    label: 'Back',
-                    accelerator: 'CmdOrCtrl+[',
-                    click: () => {
-                        goBack();
-                    }
-                },
-                {
-                    label: 'Forward',
-                    accelerator: 'CmdOrCtrl+]',
-                    click: () => {
-                        goForward();
-                    }
-                },
                 {
                     label: 'Reload',
                     accelerator: 'CmdOrCtrl+R',
@@ -134,20 +101,6 @@ function createMenu({nativefierVersion, appQuit, zoomIn, zoomOut, goBack, goForw
                     click: () => {
                         zoomOut();
                     }
-                },
-                {
-                    label: 'Toggle Developer Tools',
-                    accelerator: (() => {
-                        if (process.platform === 'darwin') {
-                            return 'Alt+Command+I';
-                        }
-                        return 'Ctrl+Shift+I';
-                    })(),
-                    click: (item, focusedWindow) => {
-                        if (focusedWindow) {
-                            focusedWindow.toggleDevTools();
-                        }
-                    }
                 }
             ]
         },
@@ -172,15 +125,29 @@ function createMenu({nativefierVersion, appQuit, zoomIn, zoomOut, goBack, goForw
             role: 'help',
             submenu: [
                 {
-                    label: `Built with Nativefier v${nativefierVersion}`,
+                    label: `Redkix Native BETA v${nativefierVersion}`,
                     click: () => {
-                        shell.openExternal('https://github.com/jiahaog/nativefier');
+                        shell.openExternal('http://redkix.com/');
                     }
                 },
                 {
-                    label: 'Report an Issue',
+                    label: 'Support',
                     click: () => {
-                        shell.openExternal('https://github.com/jiahaog/nativefier/issues');
+                        shell.openExternal('http://redkix.com/');
+                    }
+                },
+                {
+                    label: 'Toggle Developer Tools',
+                    accelerator: (() => {
+                        if (process.platform === 'darwin') {
+                            return 'Alt+Command+I';
+                        }
+                        return 'Ctrl+Shift+I';
+                    })(),
+                    click: (item, focusedWindow) => {
+                        if (focusedWindow) {
+                            focusedWindow.toggleDevTools();
+                        }
                     }
                 }
             ]

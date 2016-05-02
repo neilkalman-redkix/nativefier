@@ -74,5 +74,5 @@ ipcMain.on('notification', () => {
     if (!isOSX() || mainWindow.isFocused()) {
         return;
     }
-    setDockBadge('●');
+    // maybe add native notifications here
 });

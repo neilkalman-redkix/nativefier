@@ -14,16 +14,15 @@ function initContextMenu(mainWindow) {
                 }
             },
             {
-                label: 'Open in new window',
-                click: () => {
-                    if (targetHref) {
-                        new BrowserWindow().loadURL(targetHref);
-                        return;
-                    }
-
-                    mainWindow.useDefaultWindowBehaviour = true;
-                    mainWindow.webContents.send('contextMenuClosed');
-                }
+                type: 'separator'
+            },
+            {
+                label: 'Copy',
+                role: 'copy'
+            },
+            {
+                label: 'Paste',
+                role: 'paste'
             }
         ];
 

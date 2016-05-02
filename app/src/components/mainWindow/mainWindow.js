@@ -137,14 +137,17 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
             }
 
             if (options.counter) {
-                const itemCountRegex = /[\(\[{](\d*?)[}\]\)]/;
-                const match = itemCountRegex.exec(mainWindow.getTitle());
-                if (match) {
-                    setDockBadge(match[1]);
-                }
-                return;
+                setTimeout(function(){
+                    const itemCountRegex = /\((\d*?)\)/;
+                    const match = itemCountRegex.exec(mainWindow.getTitle());
+                    if (match) {
+                        setDockBadge(match[1]);
+                    } else {
+                        setDockBadge('');
+                    }
+                    return;
+                }, 1000);
             }
-            setDockBadge('●');
         });
     }
 
@@ -174,6 +177,17 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
         }
         maybeHideWindow(mainWindow, event);
     });
+
+    // ** NEED THIS? **
+    var handleRedirect = (e, url) => {
+      if(url != mainWindow.webContents.getURL()) {
+        e.preventDefault();
+        require('electron').shell.openExternal(url);
+      }
+    }
+
+    mainWindow.webContents.on('will-navigate', handleRedirect);
+    mainWindow.webContents.on('new-window', handleRedirect);
 
     return mainWindow;
 }
