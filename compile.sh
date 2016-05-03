@@ -2,15 +2,15 @@ npm run dev-up
 npm link
 # maybe we need injections for communications
 # PRODUCATION
-nativefier --name "Redkix" "https://beta.redkix.com/" --icon "assets/redkix.icns" --counter --maximize
+nativefier --name "Redkix" "https://beta.redkix.com/" --icon "assets/Production.icns" --counter --maximize
 # STAGING
-nativefier --name "Redkix Staging" "https://staging.redkix.com/" --icon "assets/redkixstaging.icns" --counter --maximize
+nativefier --name "Redkix Staging" "https://staging.redkix.com/" --icon "assets/Staging.icns" --counter --maximize
 # INTEGRATION
-nativefier --name "Redkix Integration" "http://int.redkix.com/" --icon "assets/redkixint.icns" --counter --maximize
+nativefier --name "Redkix Integration" "http://int.redkix.com/" --icon "assets/Integration.icns" --counter --maximize
 # NIGHTLY
-nativefier --name "Redkix Nightly" "http://nightly.redkix.com/" --icon "assets/redkixnightly.icns" --counter --maximize
+nativefier --name "Redkix Nightly" "http://nightly.redkix.com/" --icon "assets/Dev.icns" --counter --maximize
 # LOCAL
-nativefier --name "Redkix localhost" "http://0.0.0.0:9000/" --icon "assets/redkixlocal.icns" --counter --maximize
+nativefier --name "Redkix localhost" "http://0.0.0.0:9000/" --icon "assets/Dev.icns" --counter --maximize
 
 # MAKE INSTALLERS FOR ALL VERSIONS
 dropdmg --config-name=Redkix "Redkix-darwin-x64/Redkix.app"
