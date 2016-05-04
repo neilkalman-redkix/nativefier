@@ -57,3 +57,15 @@ console.log('DONE'.green);
 console.log('Building localhost desktop Installer...');
 exec('dropdmg --config-name=Redkix "Redkix localhost-darwin-x64/Redkix localhost.app"');
 console.log('DONE'.green);
+
+exec('rm -r ./OS_X_x64');
+
+mkdirp('./OS_X_x64', function(err) { 
+
+    fs.copySync( './Redkix-darwin-x64/Redkix.dmg', './OS_X_x64/Redkix.dmg');
+	fs.copySync('./Redkix Staging-darwin-x64/Redkix Staging.dmg', './OS_X_x64/Redkix Staging.dmg');
+	fs.copySync('./Redkix Integration-darwin-x64/Redkix Integration.dmg', './OS_X_x64/Redkix Integration.dmg');
+	fs.copySync('./Redkix Nightly-darwin-x64/Redkix Nightly.dmg', './OS_X_x64/Redkix Nightly.dmg');
+	fs.copySync('./Redkix localhost-darwin-x64/Redkix localhost.dmg', './OS_X_x64/Redkix localhost.dmg');
+
+});
