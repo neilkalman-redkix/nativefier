@@ -132,13 +132,10 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
 
     if (options.counter) {
         mainWindow.on('page-title-updated', () => {
-            if (mainWindow.isFocused()) {
-                return;
-            }
 
             if (options.counter) {
                 setTimeout(function(){
-                    const itemCountRegex = /\((\d*?)\)/;
+                    const itemCountRegex = /\((\d*?\+?)\)/;
                     const match = itemCountRegex.exec(mainWindow.getTitle());
                     if (match) {
                         setDockBadge(match[1]);
@@ -165,10 +162,6 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
     });
 
     mainWindow.loadURL(options.targetUrl);
-
-    mainWindow.on('focus', () => {
-        setDockBadge('');
-    });
 
     mainWindow.on('close', event => {
         if (mainWindow.isFullScreen()) {
