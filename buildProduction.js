@@ -149,6 +149,13 @@ if (isWindows) {
 
 	console.log('BUILD PHASE DONE'.black.bgCyan);
 
+	console.log('CODE SIGN THE APPS'.black.bgWhite);
+	// only signing PRODUCTION, STAGING, & INTEGRATION. NIGHTLY AND LOCAL AREN'T SIGNED
+	exec('codesign --deep --force --strict --sign "SR6R6E5YKT" "Redkix-darwin-x64/Redkix.app"');
+	exec('codesign --deep --force --strict --sign "SR6R6E5YKT" "Redkix Staging-darwin-x64/Redkix Staging.app"');
+	exec('codesign --deep --force --strict --sign "SR6R6E5YKT" "Redkix Integration-darwin-x64/Redkix Integration.app"');
+	console.log('DONE'.green);
+
 	console.log('BUILD INSTALLERS PHASE STARTED'.black.bgMagenta);
 
 	/* MAKE INSTALLERS FOR ALL VERSIONS */
