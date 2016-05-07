@@ -50,6 +50,7 @@ function setNotificationCallback(callback) {
 
     const OldNotify = window.Notification;
     const newNotify = (title, opt) => {
+        opt.icon = undefined;
         callback(title, opt);
         return new OldNotify(title, opt);
     };
