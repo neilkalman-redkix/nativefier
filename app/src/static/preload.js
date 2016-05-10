@@ -12,6 +12,27 @@ setNotificationCallback((title, opt) => {
     ipcRenderer.send('notification', title, opt);
 });
 
+function watched() {
+    var vm = this;
+    var loggedIn = false;
+
+    vm.__defineSetter__('loggedIn', function(newValue) {
+      console.log('LOGGED IN: ' + newValue);
+      if (newValue) {
+        ipcRenderer.send('logged-in');
+      } else {
+        ipcRenderer.send('logged-out');
+      }
+      loggedIn = newValue;
+    });
+
+    vm.__defineGetter__('loggedIn', function() {
+      return loggedIn;
+    });
+};
+
+window.forWrapper = new watched();
+
 document.addEventListener('DOMContentLoaded', () => {
     // do things
 

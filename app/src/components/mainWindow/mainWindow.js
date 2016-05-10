@@ -11,6 +11,8 @@ const {isOSX, linkIsInternal, getCssToInject} = helpers;
 
 const ZOOM_INTERVAL = 0.1;
 
+var savedWindowSize = undefined;
+
 /**
  *
  * @param {{}} options AppArgs from nativefier.json
@@ -20,14 +22,16 @@ const ZOOM_INTERVAL = 0.1;
  */
 function createMainWindow(options, onAppQuit, setDockBadge) {
     const mainWindowState = windowStateKeeper({
-        defaultWidth: options.width || 1280,
-        defaultHeight: options.height || 800
+        defaultWidth: 1300,
+        defaultHeight: 780
     });
 
     const mainWindow = new BrowserWindow({
         frame: !options.hideWindowFrame,
         width: mainWindowState.width,
+        minWidth: 1024,
         height: mainWindowState.height,
+        minHeight: 668,
         x: mainWindowState.x,
         y: mainWindowState.y,
         'auto-hide-menu-bar': !options.showMenuBar,
@@ -148,7 +152,7 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
         });
     }
 
-    mainWindow.webContents.on('new-window', (event, urlToGo) => {
+    /*mainWindow.webContents.on('new-window', (event, urlToGo) => {
         if (mainWindow.useDefaultWindowBehaviour) {
             mainWindow.useDefaultWindowBehaviour = false;
             return;
@@ -159,7 +163,7 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
         }
         event.preventDefault();
         shell.openExternal(urlToGo);
-    });
+    });*/
 
     mainWindow.loadURL(options.targetUrl);
 
@@ -172,12 +176,35 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
     });
 
     // ** NEED THIS? **
-    var handleRedirect = (e, url) => {
-      if(url != mainWindow.webContents.getURL()) {
-        e.preventDefault();
-        require('electron').shell.openExternal(url);
-      }
+    var handleRedirect = (event, urlToGo) => {
+        var isLinkInternal = linkIsInternal(options.targetUrl, urlToGo);
+        // external link
+        if(!isLinkInternal) {
+            event.preventDefault();
+            require('electron').shell.openExternal(urlToGo);
+        }
     }
+
+    ipcMain.on('logged-in', function() {
+        if (savedWindowSize && mainWindow.getSize()[0] === 475 && mainWindow.getSize()[1] === 561) {
+            savedWindowSize[0] = savedWindowSize[0] > 1024 ? savedWindowSize[0] : 1300;
+            savedWindowSize[1] = savedWindowSize[1] > 668 ? savedWindowSize[1] : 780;
+            mainWindow.setSize(savedWindowSize[0], savedWindowSize[1], false);
+        }
+        mainWindow.setResizable(true);
+        mainWindow.center();
+    });
+
+    ipcMain.on('logged-out', function() {
+        setTimeout(function(){
+            if (getCurrentUrl().indexOf('home') === -1) {
+                savedWindowSize = mainWindow.getSize();
+                mainWindow.setSize(475, 560, false);
+                mainWindow.setResizable(false);
+                mainWindow.center();
+            }
+        }, 500);
+    });
 
     mainWindow.webContents.on('will-navigate', handleRedirect);
     mainWindow.webContents.on('new-window', handleRedirect);
