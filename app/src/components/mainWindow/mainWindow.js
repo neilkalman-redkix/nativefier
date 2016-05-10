@@ -152,19 +152,6 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
         });
     }
 
-    /*mainWindow.webContents.on('new-window', (event, urlToGo) => {
-        if (mainWindow.useDefaultWindowBehaviour) {
-            mainWindow.useDefaultWindowBehaviour = false;
-            return;
-        }
-
-        if (linkIsInternal(options.targetUrl, urlToGo)) {
-            return;
-        }
-        event.preventDefault();
-        shell.openExternal(urlToGo);
-    });*/
-
     mainWindow.loadURL(options.targetUrl);
 
     mainWindow.on('close', event => {
