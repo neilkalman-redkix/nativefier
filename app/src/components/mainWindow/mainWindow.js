@@ -11,6 +11,13 @@ const {isOSX, linkIsInternal, getCssToInject} = helpers;
 
 const ZOOM_INTERVAL = 0.1;
 
+const loginWidth = 475;
+const loginHeight = 560;
+const defaultWidth = 1300;
+const defaultHeight = 780;
+const minWidth = 1024;
+const minHeight = 668;
+
 var savedWindowSize = undefined;
 
 /**
@@ -173,11 +180,13 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
     }
 
     ipcMain.on('logged-in', function() {
-        if (savedWindowSize && mainWindow.getSize()[0] === 475 && mainWindow.getSize()[1] === 561) {
-            savedWindowSize[0] = savedWindowSize[0] > 1024 ? savedWindowSize[0] : 1300;
-            savedWindowSize[1] = savedWindowSize[1] > 668 ? savedWindowSize[1] : 780;
+        if (mainWindow.getSize()[0] === loginWidth && mainWindow.getSize()[1] === loginHeight) {
+            savedWindowSize = savedWindowSize || [0, 0];
+            savedWindowSize[0] = savedWindowSize[0] > minWidth ? savedWindowSize[0] : defaultWidth;
+            savedWindowSize[1] = savedWindowSize[1] > minHeight ? savedWindowSize[1] : defaultHeight;
             mainWindow.setSize(savedWindowSize[0], savedWindowSize[1], false);
         }
+
         mainWindow.setResizable(true);
         mainWindow.center();
     });
@@ -186,7 +195,7 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
         setTimeout(function(){
             if (getCurrentUrl().indexOf('home') === -1) {
                 savedWindowSize = mainWindow.getSize();
-                mainWindow.setSize(475, 560, false);
+                mainWindow.setSize(loginWidth, loginHeight, false);
                 mainWindow.setResizable(false);
                 mainWindow.center();
             }
