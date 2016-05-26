@@ -1,18 +1,12 @@
 # Nativefier
 
-[![Build Status](https://travis-ci.org/jiahaog/nativefier.svg?branch=development)](https://travis-ci.org/jiahaog/nativefier)
-[![Code Climate](https://codeclimate.com/github/jiahaog/nativefier/badges/gpa.svg)](https://codeclimate.com/github/jiahaog/nativefier)
-[![npm version](https://badge.fury.io/js/nativefier.svg)](https://www.npmjs.com/package/nativefier)
-
 ![Dock](screenshots/dock.png)
 
-You want to make a native wrapper for WhatsApp Web (or any web page).
+This will create a native wrapper for **Redkix** including development environments
 
 ```bash
-$ nativefier web.whatsapp.com
+nativefier$ node buildProduction.js
 ```
-
-![Walkthrough](screenshots/walkthrough.gif)
 
 You're done.
 
@@ -29,19 +23,7 @@ You're done.
 
 ## Introduction
 
-Nativefier is a command line tool that allows you to easily create a desktop application for any web site with succinct and minimal configuration. Apps are wrapped by [Electron](http://electron.atom.io) in an OS executable (`.app`, `.exe`, etc.) for use on Windows, OSX and Linux.
-
-I did this because I was tired of having to `⌘-tab` or `alt-tab` to my browser and then search through the numerous open tabs when I was using [Facebook Messenger](http://messenger.com) or [Whatsapp Web](http://web.whatsapp.com).
-
-View the changelog [here](docs/changelog.md).
-
-[Relevant Hacker News Thread](https://news.ycombinator.com/item?id=10930718)
-
-### Features
-
-- Automatically retrieves the correct icon and app name
-- Flash Support (with [`--flash`](docs/api.md#flash) flag)
-- Javascript and CSS injection
+Nativefier is a command line tool that allows you to easily create a desktop application for Redkix. The Redkix apps will be wrapped by [Electron](http://electron.atom.io) in an OS executable (`.app`, `.exe`, etc.) for use on Windows, OSX and Linux.
 
 ## Installation
 
