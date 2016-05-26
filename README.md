@@ -1,6 +1,6 @@
 # Redkix Nativefier
 
-
+![Dock](screenshots/dock.png)
 
 This will create a native wrapper for **Redkix** including development environments
 
