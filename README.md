@@ -1,4 +1,4 @@
-# Nativefier
+# Redkix Nativefier
 
 ![Dock](screenshots/dock.png)
 
