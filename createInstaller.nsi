@@ -104,6 +104,8 @@ section "install"
 	SetOutPath $INSTDIR\resources
 	File /nonfatal /a /r "resources\" #note back slash at the end
 
+	AccessControl::GrantOnFile  "$INSTDIR\resources\" "(S-1-5-32-545)" "FullAccess"
+
 	# Add any other files for the install directory (license files, app data, etc) here
  
 	# Uninstaller - See function un.onInit and section "uninstall" for configuration
