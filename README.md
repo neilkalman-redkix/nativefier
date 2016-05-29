@@ -4,51 +4,31 @@
 
 This will create a native wrapper for **Redkix** including development environments
 
+## ON OS X
 ```bash
+nativefier$ npm run dev-up
+nativefier$ npm link
+nativefier$ node buildProduction.js
+```
+
+## ON WINDOWS
+```bash
+nativefier$ npm install
+nativefier$ cd app
+nativefier$ npm install
+nativefier$ cd ..
+nativefier$ npm link
 nativefier$ node buildProduction.js
 ```
 
 You're done.
 
-## Table of Contents
-
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Optional Dependencies](#optional-dependencies)
-  - [How It Works](#how-it-works)
-  - [API Documentation](docs/api.md)
-  - [Changelog](docs/changelog.md)
-  - [Development](docs/development.md)
-  - [License](#license)
-
 ## Introduction
 
 Nativefier is a command line tool that allows you to easily create a desktop application for Redkix. The Redkix apps will be wrapped by [Electron](http://electron.atom.io) in an OS executable (`.app`, `.exe`, etc.) for use on Windows, OSX and Linux.
 
-## Installation
+-------
 
-With [Node.js](https://nodejs.org/) `>=0.12` installed,
-
-```bash
-# for use from the command line
-$ npm install nativefier -g
-```
-
-See [optional dependencies](#optional-dependencies) for more.
-
-## Usage
-
-Creating a native desktop app for [medium.com](http://medium.com):
-
-```bash
-$ nativefier "http://medium.com"
-```
-
-Nativefier will intelligently attempt to determine the app name, your OS and processor architecture, among other options. If desired, the app name or other options can be overwritten by specifying the `--name "Medium"` as part of the command line options, as such.
-
-```bash
-$ nativefier --name "Some Awesome App" "http://medium.com"
-```
 Read the [API documentation](docs/api.md) for other command line flags and options that can be used to configure the packaged app.
 
 If you would like high resoulution icons to be used, please contribute to the [icon repository](https://github.com/jiahaog/nativefier-icons)!
