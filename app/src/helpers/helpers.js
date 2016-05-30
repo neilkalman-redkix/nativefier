@@ -20,7 +20,10 @@ function isWindows() {
 function linkIsInternal(currentUrl, newUrl) {
     var currentDomain = wurl('domain', currentUrl);
     var newDomain = wurl('domain', newUrl);
-    return currentDomain === newDomain;
+    return newUrl.indexOf('nightly.redkix.com') !== -1 ||
+      newUrl.indexOf('integration.redkix.com') !== -1 ||
+      newUrl.indexOf('staging.redkix.com') !== -1 ||
+      newUrl.indexOf('beta.redkix.com') !== -1;
 }
 
 function getCssToInject() {
