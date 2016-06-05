@@ -21,7 +21,7 @@ function linkIsInternal(currentUrl, newUrl) {
     var currentDomain = wurl('domain', currentUrl);
     var newDomain = wurl('domain', newUrl);
     return newUrl.indexOf('nightly.redkix.com') !== -1 ||
-      newUrl.indexOf('integration.redkix.com') !== -1 ||
+      newUrl.indexOf('int.redkix.com') !== -1 ||
       newUrl.indexOf('staging.redkix.com') !== -1 ||
       newUrl.indexOf('beta.redkix.com') !== -1;
 }
