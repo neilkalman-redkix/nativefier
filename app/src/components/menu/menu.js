@@ -46,6 +46,11 @@ function createMenu({nativefierVersion, appQuit, zoomIn, zoomOut, goBack, goForw
                     label: 'Paste',
                     accelerator: 'CmdOrCtrl+V',
                     role: 'paste'
+                },
+                {
+                    label: 'Select All',
+                    accelerator: 'CmdOrCtrl+A',
+                    role: 'selectall'
                 }
             ]
         },
