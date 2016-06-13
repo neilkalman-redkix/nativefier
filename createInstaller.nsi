@@ -31,7 +31,6 @@
 !define MUI_DIRECTORYPAGE_TEXT_DESTINATION "Please select where you'd like the app to be installed"
 !insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
-!insertmacro MUI_LANGUAGE English
 
 !define MUI_FINISHPAGE_RUN
 !define MUI_FINISHPAGE_RUN_TEXT "Launch Redkix"
@@ -70,7 +69,7 @@ function .onInit
 functionEnd
 
 Function StartRedkix
-	ExecShell "" "$INSTDIR\Redkix Integration.exe"
+	ExecShell "" "$INSTDIR\${APPNAME}.exe"
 FunctionEnd
 
 section "install"
