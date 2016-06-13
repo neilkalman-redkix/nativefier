@@ -23,6 +23,7 @@ function linkIsInternal(currentUrl, newUrl) {
     return newUrl.indexOf('nightly.redkix.com') !== -1 ||
       newUrl.indexOf('int.redkix.com') !== -1 ||
       newUrl.indexOf('staging.redkix.com') !== -1 ||
+      newUrl.indexOf('gmail.redkix.com') !== -1 ||
       newUrl.indexOf('beta.redkix.com') !== -1;
 }
 

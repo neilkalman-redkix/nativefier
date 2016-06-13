@@ -13,6 +13,7 @@ if (isWindows) {
 	var buildIntegration = 'nativefier --name "Redkix Integration" "http://int.redkix.com/" --icon "assets/Integration.ico" --counter --maximize --arch=ia32';
 	var buildNightly = 'nativefier --name "Redkix Nightly" "http://nightly.redkix.com/" --icon "assets/Dev.ico" --counter --maximize --arch=ia32';
 	var buildLocalhost = 'nativefier --name "Redkix localhost" "http://0.0.0.0:9000/" --icon "assets/Dev.ico" --counter --maximize --arch=ia32';
+	var buildGmail = 'nativefier --name "Redkix Gmail" "http://gmail.redkix.com/" --icon "assets/redkixGmail.ico" --counter --maximize --arch=ia32';
 
 	console.log('BUILD PHASE STARTED'.black.bgCyan);
 
@@ -36,11 +37,16 @@ if (isWindows) {
 	exec(buildLocalhost);
 	console.log('DONE'.green);
 
+	console.log('Building gmail desktop wrapper...');
+	exec(buildGmail);
+	console.log('DONE'.green);
+
 	fs.copySync('./assets/Production.ico', './Redkix-win32-ia32/logo.ico');
 	fs.copySync('./assets/Staging.ico', './Redkix Staging-win32-ia32/logo.ico');
 	fs.copySync('./assets/Integration.ico', './Redkix Integration-win32-ia32/logo.ico');
 	fs.copySync('./assets/Dev.ico', './Redkix Nightly-win32-ia32/logo.ico');
 	fs.copySync('./assets/Dev.ico', './Redkix localhost-win32-ia32/logo.ico');
+	fs.copySync('./assets/redkixGmail.ico', './Redkix Gmail-win32-ia32/redkixGmail.ico');
 
 	console.log('BUILD PHASE DONE'.black.bgCyan);
 
@@ -60,6 +66,8 @@ if (isWindows) {
 	var nightly = basicInstall.replace('!define APPNAME "Redkix"', '!define APPNAME "Redkix Nightly"');
 	// Staging
 	var localhost = basicInstall.replace('!define APPNAME "Redkix"', '!define APPNAME "Redkix localhost"');
+	// Gmail
+	var gmail = basicInstall.replace('!define APPNAME "Redkix"', '!define APPNAME "Redkix Gmail"');
 
 	fs.writeFileSync('./Redkix-win32-ia32/createInstaller.nsi', production, 'utf8');
 
@@ -70,6 +78,8 @@ if (isWindows) {
 	fs.writeFileSync('./Redkix Nightly-win32-ia32/createInstaller.nsi', nightly, 'utf8');
 
 	fs.writeFileSync('./Redkix localhost-win32-ia32/createInstaller.nsi', localhost, 'utf8');
+
+	fs.writeFileSync('./Redkix Gmail-win32-ia32/createInstaller.nsi', gmail, 'utf8');
 
 	console.log('DONE'.green);
 
@@ -95,6 +105,10 @@ if (isWindows) {
 	exec('"C:\\Program Files (x86)\\NSIS\\makensis.exe" "Redkix localhost-win32-ia32\\createInstaller.nsi"');
 	console.log('DONE'.green);
 
+	console.log('Building gmail desktop Installer...');
+	exec('"C:\\Program Files (x86)\\NSIS\\makensis.exe" "Redkix Gmail-win32-ia32\\createInstaller.nsi"');
+	console.log('DONE'.green);
+
 	console.log('BUILD INSTALLERS PHASE DONE'.black.bgMagenta);
 
 	console.log('BUILD FINISHED'.greenBg);
@@ -108,6 +122,7 @@ if (isWindows) {
 		fs.copySync('./Redkix Integration-win32-ia32/Redkix Integration Installer.exe', './WIN_x32/Redkix Integration Installer.exe');
 		fs.copySync('./Redkix Nightly-win32-ia32/Redkix Nightly Installer.exe', './WIN_x32/Redkix Nightly Installer.exe');
 		fs.copySync('./Redkix localhost-win32-ia32/Redkix localhost Installer.exe', './WIN_x32/Redkix localhost Installer.exe');
+		fs.copySync('./Redkix localhost-win32-ia32/Redkix Gmail Installer.exe', './WIN_x32/Redkix Gmail Installer.exe');
 
 		console.log('SIGN CERTIFICATE PHASE STARTED'.bgRed.black);
 		exec('signtool.exe sign /t http://timestamp.digicert.com /f redkix.p12 /p 56784321 "WIN_x32\\Redkix Installer.exe"');
@@ -115,6 +130,7 @@ if (isWindows) {
 		exec('signtool.exe sign /t http://timestamp.digicert.com /f redkix.p12 /p 56784321 "WIN_x32\\Redkix Integration Installer.exe"');
 		exec('signtool.exe sign /t http://timestamp.digicert.com /f redkix.p12 /p 56784321 "WIN_x32\\Redkix Nightly Installer.exe"');
 		exec('signtool.exe sign /t http://timestamp.digicert.com /f redkix.p12 /p 56784321 "WIN_x32\\Redkix localhost Installer.exe"');
+		exec('signtool.exe sign /t http://timestamp.digicert.com /f redkix.p12 /p 56784321 "WIN_x32\\Redkix Gmail Installer.exe"');
 		console.log('SIGN CERTIFICATE PHASE FINISHED'.bgRed.black);
 
 	});
@@ -126,6 +142,7 @@ if (isWindows) {
 	var buildIntegration = 'nativefier --name "Redkix Integration" "http://int.redkix.com/" --icon "assets/Integration.icns" --counter --maximize';
 	var buildNightly = 'nativefier --name "Redkix Nightly" "http://nightly.redkix.com/" --icon "assets/Dev.icns" --counter --maximize';
 	var buildLocalhost = 'nativefier --name "Redkix localhost" "http://0.0.0.0:9000/" --icon "assets/Dev.icns" --counter --maximize';
+	var buildGmail = 'nativefier --name "Redkix Gmail" "http://gmail.redkix.com/" --icon "assets/redkixGmail.icns" --counter --maximize';
 
 
 	console.log('BUILD LATEST NATIVEFIER AND CREATE GLOBAL VARIABLE'.black.bgRed);
@@ -155,6 +172,10 @@ if (isWindows) {
 	exec(buildLocalhost);
 	console.log('DONE'.green);
 
+	console.log('Building gmail desktop wrapper...');
+	exec(buildGmail);
+	console.log('DONE'.green);
+
 	console.log('BUILD PHASE DONE'.black.bgCyan);
 
 	console.log('CODE SIGN THE APPS'.black.bgWhite);
@@ -162,6 +183,7 @@ if (isWindows) {
 	exec('codesign --deep --force --strict --sign "SR6R6E5YKT" "Redkix-darwin-x64/Redkix.app"');
 	exec('codesign --deep --force --strict --sign "SR6R6E5YKT" "Redkix Staging-darwin-x64/Redkix Staging.app"');
 	exec('codesign --deep --force --strict --sign "SR6R6E5YKT" "Redkix Integration-darwin-x64/Redkix Integration.app"');
+	exec('codesign --deep --force --strict --sign "SR6R6E5YKT" "Redkix Gmail-darwin-x64/Redkix Gmail.app"');
 	console.log('DONE'.green);
 
 	console.log('BUILD INSTALLERS PHASE STARTED'.black.bgMagenta);
@@ -182,6 +204,9 @@ if (isWindows) {
 	console.log('Building localhost desktop Installer...');
 	exec('dropdmg --config-name=Redkix "Redkix localhost-darwin-x64/Redkix localhost.app"');
 	console.log('DONE'.green);
+	console.log('Building Gmail desktop Installer...');
+	exec('dropdmg --config-name=Redkix "Redkix Gmail-darwin-x64/Redkix Gmail.app"');
+	console.log('DONE'.green);
 
 	exec('rm -r ./OS_X_x64');
 
@@ -192,6 +217,7 @@ if (isWindows) {
 		fs.copySync('./Redkix Integration-darwin-x64/Redkix Integration.dmg', './OS_X_x64/Redkix Integration.dmg');
 		fs.copySync('./Redkix Nightly-darwin-x64/Redkix Nightly.dmg', './OS_X_x64/Redkix Nightly.dmg');
 		fs.copySync('./Redkix localhost-darwin-x64/Redkix localhost.dmg', './OS_X_x64/Redkix localhost.dmg');
+		fs.copySync('./Redkix Gmail-darwin-x64/Redkix Gmail.dmg', './OS_X_x64/Redkix Gmail.dmg');
 
 	});
 }
