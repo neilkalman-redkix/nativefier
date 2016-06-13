@@ -122,7 +122,7 @@ if (isWindows) {
 		fs.copySync('./Redkix Integration-win32-ia32/Redkix Integration Installer.exe', './WIN_x32/Redkix Integration Installer.exe');
 		fs.copySync('./Redkix Nightly-win32-ia32/Redkix Nightly Installer.exe', './WIN_x32/Redkix Nightly Installer.exe');
 		fs.copySync('./Redkix localhost-win32-ia32/Redkix localhost Installer.exe', './WIN_x32/Redkix localhost Installer.exe');
-		fs.copySync('./Redkix localhost-win32-ia32/Redkix Gmail Installer.exe', './WIN_x32/Redkix Gmail Installer.exe');
+		fs.copySync('./Redkix Gmail-win32-ia32/Redkix Gmail Installer.exe', './WIN_x32/Redkix Gmail Installer.exe');
 
 		console.log('SIGN CERTIFICATE PHASE STARTED'.bgRed.black);
 		exec('signtool.exe sign /t http://timestamp.digicert.com /f redkix.p12 /p 56784321 "WIN_x32\\Redkix Installer.exe"');
