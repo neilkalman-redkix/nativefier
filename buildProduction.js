@@ -46,7 +46,7 @@ if (isWindows) {
 	fs.copySync('./assets/Integration.ico', './Redkix Integration-win32-ia32/logo.ico');
 	fs.copySync('./assets/Dev.ico', './Redkix Nightly-win32-ia32/logo.ico');
 	fs.copySync('./assets/Dev.ico', './Redkix localhost-win32-ia32/logo.ico');
-	fs.copySync('./assets/redkixGmail.ico', './Redkix Gmail-win32-ia32/redkixGmail.ico');
+	fs.copySync('./assets/redkixGmail.ico', './Redkix Gmail-win32-ia32/logo.ico');
 
 	console.log('BUILD PHASE DONE'.black.bgCyan);
 
