@@ -138,7 +138,6 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
 
     mainWindow.webContents.on('did-get-response-details', () => {
         mainWindow.webContents.send('params', JSON.stringify(options));
-        mainWindow.webContents.insertCSS(getCssToInject());
     });
 
     if (options.counter) {
