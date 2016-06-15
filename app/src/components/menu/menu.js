@@ -130,7 +130,7 @@ function createMenu({nativefierVersion, appQuit, zoomIn, zoomOut, goBack, goForw
             role: 'help',
             submenu: [
                 {
-                    label: `Redkix Native BETA v${nativefierVersion}`,
+                    label: `Redkix Desktop BETA v1.0.0`,
                     click: () => {
                         shell.openExternal('http://redkix.com/');
                     }
@@ -138,21 +138,7 @@ function createMenu({nativefierVersion, appQuit, zoomIn, zoomOut, goBack, goForw
                 {
                     label: 'Support',
                     click: () => {
-                        shell.openExternal('http://redkix.com/');
-                    }
-                },
-                {
-                    label: 'Toggle Developer Tools',
-                    accelerator: (() => {
-                        if (process.platform === 'darwin') {
-                            return 'Alt+Command+I';
-                        }
-                        return 'Ctrl+Shift+I';
-                    })(),
-                    click: (item, focusedWindow) => {
-                        if (focusedWindow) {
-                            focusedWindow.toggleDevTools();
-                        }
+                        shell.openExternal('http://www.redkix.com/user-guide');
                     }
                 }
             ]
