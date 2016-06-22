@@ -47,3 +47,9 @@ node_modules
 *.iml
 out
 gen
+
+# BUILD created files
+*-darwin-x64/
+*-win32-ia32/
+OS_X_x64/
+WIN_x32/
