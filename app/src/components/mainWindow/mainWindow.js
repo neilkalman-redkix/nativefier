@@ -50,7 +50,8 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
             // node globals causes problems with sites like messenger.com
             nodeIntegration: false,
             webSecurity: !options.insecure,
-            preload: path.join(__dirname, 'static', 'preload.js')
+            preload: path.join(__dirname, 'static', 'preload.js'),
+            allowDisplayingInsecureContent: true
         },
         // after webpack path here should reference `resources/app/`
         icon: path.join(__dirname, '../', '/icon.png'),
