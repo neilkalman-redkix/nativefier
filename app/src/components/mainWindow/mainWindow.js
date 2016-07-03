@@ -19,6 +19,7 @@ const minWidth = 1024;
 const minHeight = 668;
 
 var savedWindowSize = undefined;
+var myDictionary = null;
 
 /**
  *
@@ -213,6 +214,14 @@ ipcMain.on('cancelNewWindowOverride', () => {
     allWindows.forEach(window => {
         window.useDefaultWindowBehaviour = false;
     });
+});
+
+ipcMain.on('checkspell', function(event, word) {
+    var res = null;
+    if(myDictionary != null && word != null) {
+        res = myDictionary.spellCheck(word);
+    }
+    event.returnValue = false;
 });
 
 function maybeHideWindow(window, event) {

@@ -12,6 +12,13 @@ setNotificationCallback((title, opt) => {
     ipcRenderer.send('notification', title, opt);
 });
 
+webFrame.setSpellCheckProvider("en-US", false, {
+    spellCheck: function(text) {      
+        var res = ipcRenderer.sendSync('checkspell', text);
+        return res != null? res : true;
+    }
+});
+
 function watched() {
     var vm = this;
     var loggedIn = false;
