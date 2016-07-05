@@ -20,7 +20,8 @@ function isWindows() {
 function linkIsInternal(currentUrl, newUrl) {
     var currentDomain = wurl('domain', currentUrl);
     var newDomain = wurl('domain', newUrl);
-    return newUrl.indexOf('nightly.redkix.com') !== -1 ||
+    return currentDomain === newDomain ||
+      newUrl.indexOf('nightly.redkix.com') !== -1 ||
       newUrl.indexOf('int.redkix.com') !== -1 ||
       newUrl.indexOf('staging.redkix.com') !== -1 ||
       newUrl.indexOf('gmail.redkix.com') !== -1 ||
@@ -37,10 +38,24 @@ function getCssToInject() {
     return fs.readFileSync(INJECT_CSS_PATH).toString();
 }
 
+/**
+ * Helper method to print debug messages from the main process in the browser window
+ * @param {BrowserWindow} browserWindow
+ * @param message
+ */
+function debugLog(browserWindow, message) {
+    // need the timeout as it takes time for the preload javascript to be loaded in the window
+    setTimeout(() => {
+        browserWindow.webContents.send('debug', message);
+    }, 3000);
+    console.log(message);
+}
+
 export default {
     isOSX,
     isLinux,
     isWindows,
     linkIsInternal,
+    debugLog,
     getCssToInject
 };
