@@ -2,7 +2,7 @@ import electron from 'electron';
 const {Menu, ipcMain, shell, BrowserWindow} = electron;
 
 function initContextMenu(mainWindow) {
-    ipcMain.on('contextMenuOpened', (event, targetHref) => {
+    ipcMain.on('contextMenuOpened', (event, targetHref, , closestInput) => {
         const contextMenuTemplate = [
             {
                 label: 'Copy',

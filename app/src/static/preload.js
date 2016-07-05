@@ -15,8 +15,13 @@ setNotificationCallback((title, opt) => {
 webFrame.setSpellCheckProvider("en-US", false, {
     spellCheck: function(text) {      
         var res = ipcRenderer.sendSync('checkspell', text);
+        // console.log('spell check returned ' + res + ' for: ' + text);
         return res != null? res : true;
     }
+});
+
+ipcRenderer.on('checkspell-asynchronous-reply', (event, arg) => {
+  console.log(arg); // prints "pong"
 });
 
 function watched() {
@@ -47,6 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         const targetElement = event.srcElement;
         const targetHref = targetElement.href;
+        // for spell checker
+        const inputElement = event.target.closest('textarea, input, [contenteditable="true"]');
 
         if (!targetHref) {
             ipcRenderer.once('contextMenuClosed', () => {
@@ -55,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        ipcRenderer.send('contextMenuOpened', targetHref);
+        ipcRenderer.send('contextMenuOpened', targetHref, inputElement);
     }, false);
 
     injectScripts();
