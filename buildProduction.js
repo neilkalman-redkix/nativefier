@@ -115,7 +115,7 @@ if (isWindows) {
 
 	exec('rmdir WIN_x32 /s /q');
 
-	mkdirp('./WIN_x32', function(err) { 
+	mkdirp('./WIN_x32', function(err) {
 
 	    fs.copySync( './Redkix-win32-ia32/Redkix Installer.exe', './WIN_x32/Redkix Installer.exe');
 		fs.copySync('./Redkix Staging-win32-ia32/Redkix Staging Installer.exe', './WIN_x32/Redkix Staging Installer.exe');
@@ -136,7 +136,7 @@ if (isWindows) {
 	});
 } else {
 	console.log('Building for OS X x64'.bgYellow.black);
-	
+
 	var buildProduction = 'nativefier --name "Redkix" "https://beta.redkix.com/" --icon "assets/Production.icns" --counter --maximize';
 	var buildStaging = 'nativefier --name "Redkix Staging" "https://staging.redkix.com/" --icon "assets/Staging.icns" --counter --maximize';
 	var buildIntegration = 'nativefier --name "Redkix Integration" "http://int.redkix.com/" --icon "assets/Integration.icns" --counter --maximize';
@@ -146,7 +146,7 @@ if (isWindows) {
 
 
 	console.log('BUILD LATEST NATIVEFIER AND CREATE GLOBAL VARIABLE'.black.bgRed);
-	exec('npm run dev-up');
+	// exec('npm run dev-up');
 	exec('npm link');
 	console.log('DONE.'.black.bgRed);
 
@@ -180,10 +180,10 @@ if (isWindows) {
 
 	console.log('CODE SIGN THE APPS'.black.bgWhite);
 	// only signing PRODUCTION, STAGING, & INTEGRATION. NIGHTLY AND LOCAL AREN'T SIGNED
-	exec('codesign --deep --force --strict --sign "SR6R6E5YKT" "Redkix-darwin-x64/Redkix.app"');
-	exec('codesign --deep --force --strict --sign "SR6R6E5YKT" "Redkix Staging-darwin-x64/Redkix Staging.app"');
-	exec('codesign --deep --force --strict --sign "SR6R6E5YKT" "Redkix Integration-darwin-x64/Redkix Integration.app"');
-	exec('codesign --deep --force --strict --sign "SR6R6E5YKT" "Redkix Gmail-darwin-x64/Redkix Gmail.app"');
+	exec('codesign --deep --force --strict --sign "4J484N4UCL" "Redkix-darwin-x64/Redkix.app"');
+	exec('codesign --deep --force --strict --sign "4J484N4UCL" "Redkix Staging-darwin-x64/Redkix Staging.app"');
+	exec('codesign --deep --force --strict --sign "4J484N4UCL" "Redkix Integration-darwin-x64/Redkix Integration.app"');
+	exec('codesign --deep --force --strict --sign "4J484N4UCL" "Redkix Gmail-darwin-x64/Redkix Gmail.app"');
 	console.log('DONE'.green);
 
 	console.log('BUILD INSTALLERS PHASE STARTED'.black.bgMagenta);
@@ -210,7 +210,7 @@ if (isWindows) {
 
 	exec('rm -r ./OS_X_x64');
 
-	mkdirp('./OS_X_x64', function(err) { 
+	mkdirp('./OS_X_x64', function(err) {
 
 	    fs.copySync( './Redkix-darwin-x64/Redkix.dmg', './OS_X_x64/Redkix.dmg');
 		fs.copySync('./Redkix Staging-darwin-x64/Redkix Staging.dmg', './OS_X_x64/Redkix Staging.dmg');
