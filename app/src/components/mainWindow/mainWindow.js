@@ -11,8 +11,8 @@ const {isOSX, linkIsInternal, getCssToInject} = helpers;
 
 const ZOOM_INTERVAL = 0.1;
 
-const loginWidth = 475;
-const loginHeight = 560;
+const loginWidth = 555;
+const loginHeight = 655;
 const defaultWidth = 1300;
 const defaultHeight = 780;
 const minWidth = 1024;
