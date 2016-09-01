@@ -42,7 +42,7 @@ app.on('window-all-closed', () => {
 app.on('activate', (event, hasVisibleWindows) => {
     if (isOSX()) {
         // this is called when the dock is clicked
-        if (!hasVisibleWindows) {
+        if (!hasVisibleWindows && mainWindow) {
             mainWindow.show();
         }
     }

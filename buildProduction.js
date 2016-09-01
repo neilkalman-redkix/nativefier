@@ -8,10 +8,12 @@ var isWindows = /^win/.test(process.platform);
 if (isWindows) {
 	console.log('Building for Windows x32'.bgCyan.black);
 
+	var rcedit = require('rcedit');
+
 	var buildProduction = 'nativefier --name "Redkix" "https://beta.redkix.com/" --icon "assets/Production.ico" --counter --maximize --arch=ia32';
 	var buildStaging = 'nativefier --name "Redkix Staging" "https://staging.redkix.com/" --icon "assets/Staging.ico" --counter --maximize --arch=ia32';
-	var buildIntegration = 'nativefier --name "Redkix Integration" "http://int.redkix.com/" --icon "assets/Integration.ico" --counter --maximize --arch=ia32';
-	var buildNightly = 'nativefier --name "Redkix Nightly" "http://nightly.redkix.com/" --icon "assets/Dev.ico" --counter --maximize --arch=ia32';
+	var buildIntegration = 'nativefier --name "Redkix Integration" "https://int.redkix.com/" --icon "assets/Integration.ico" --counter --maximize --arch=ia32';
+	var buildNightly = 'nativefier --name "Redkix Nightly" "https://nightly.redkix.com/" --icon "assets/Dev.ico" --counter --maximize --arch=ia32';
 	var buildLocalhost = 'nativefier --name "Redkix localhost" "http://0.0.0.0:9000/" --icon "assets/Dev.ico" --counter --maximize --arch=ia32';
 	var buildGmail = 'nativefier --name "Redkix Gmail" "http://gmail.redkix.com/" --icon "assets/redkixGmail.ico" --counter --maximize --arch=ia32';
 
@@ -68,6 +70,28 @@ if (isWindows) {
 	var localhost = basicInstall.replace('!define APPNAME "Redkix"', '!define APPNAME "Redkix localhost"');
 	// Gmail
 	var gmail = basicInstall.replace('!define APPNAME "Redkix"', '!define APPNAME "Redkix Gmail"');
+
+	var options = {
+		'version-string': {
+			'CompanyName': 'Redkix',
+			'FileDescription': 'The new outlook on email',
+			'ProductName': 'Redkix Desktop Client'
+		}
+	};
+
+	var callback = function() {};
+
+	rcedit('./Redkix-win32-ia32/Redkix.exe', options, callback);
+
+	rcedit('./Redkix Staging-win32-ia32/Redkix Staging.exe', options, callback);
+
+	rcedit('./Redkix Integration-win32-ia32/Redkix Integration.exe', options, callback);
+
+	rcedit('./Redkix Nightly-win32-ia32/Redkix Nightly.exe', options, callback);
+
+	rcedit('./Redkix localhost-win32-ia32/Redkix localhost.exe', options, callback);
+
+	rcedit('./Redkix Gmail-win32-ia32/Redkix Gmail.exe', options, callback);
 
 	fs.writeFileSync('./Redkix-win32-ia32/createInstaller.nsi', production, 'utf8');
 
@@ -139,8 +163,8 @@ if (isWindows) {
 
 	var buildProduction = 'nativefier --name "Redkix" "https://beta.redkix.com/" --icon "assets/Production.icns" --counter --maximize';
 	var buildStaging = 'nativefier --name "Redkix Staging" "https://staging.redkix.com/" --icon "assets/Staging.icns" --counter --maximize';
-	var buildIntegration = 'nativefier --name "Redkix Integration" "http://int.redkix.com/" --icon "assets/Integration.icns" --counter --maximize';
-	var buildNightly = 'nativefier --name "Redkix Nightly" "http://nightly.redkix.com/" --icon "assets/Dev.icns" --counter --maximize';
+	var buildIntegration = 'nativefier --name "Redkix Integration" "https://int.redkix.com/" --icon "assets/Integration.icns" --counter --maximize';
+	var buildNightly = 'nativefier --name "Redkix Nightly" "https://nightly.redkix.com/" --icon "assets/Dev.icns" --counter --maximize';
 	var buildLocalhost = 'nativefier --name "Redkix localhost" "http://0.0.0.0:9000/" --icon "assets/Dev.icns" --counter --maximize';
 	var buildGmail = 'nativefier --name "Redkix Gmail" "http://gmail.redkix.com/" --icon "assets/redkixGmail.icns" --counter --maximize';
 
