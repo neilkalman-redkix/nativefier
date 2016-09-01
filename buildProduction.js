@@ -71,11 +71,12 @@ if (isWindows) {
 	// Gmail
 	var gmail = basicInstall.replace('!define APPNAME "Redkix"', '!define APPNAME "Redkix Gmail"');
 
+	/* IN ORDER TO CHANGE TASK MANAGER NAME */
 	var options = {
 		'version-string': {
-			'CompanyName': 'Redkix',
-			'FileDescription': 'The new outlook on email',
-			'ProductName': 'Redkix Desktop Client'
+			//'CompanyName': 'Redkix',
+			'FileDescription': 'Redkix Desktop Client',
+			//'ProductName': 'Redkix Desktop Client'
 		}
 	};
 
