@@ -8,7 +8,10 @@ This will create a native wrapper for **Redkix** including development environme
 ```bash
 nativefier$ npm run dev-up
 nativefier$ npm link
+# for all version
 nativefier$ node buildProduction.js
+#for development
+nativefier$ nativefier --name "Redkix localhost" "http://0.0.0.0:9000/" --icon "assets/Dev.icns" --counter --maximize
 ```
 
 ## ON WINDOWS
@@ -18,7 +21,10 @@ nativefier$ cd app
 nativefier$ npm install
 nativefier$ cd ..
 nativefier$ npm link
+# for all version
 nativefier$ node buildProduction.js
+#for development
+nativefier$ nativefier --name "Redkix localhost" "http://0.0.0.0:9000/" --icon "assets/Dev.icns" --counter --maximize
 ```
 
 You're done.
