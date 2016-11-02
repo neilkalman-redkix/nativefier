@@ -10,7 +10,7 @@ nativefier$ npm run dev-up
 nativefier$ npm link
 # for all version
 nativefier$ node buildProduction.js
-#for development
+#for development, without building all versions (nightly, integration, etc.), certification, building the installer, & moving everything each time
 nativefier$ nativefier --name "Redkix localhost" "http://0.0.0.0:9000/" --icon "assets/Dev.icns" --counter --maximize
 ```
 
@@ -23,7 +23,7 @@ nativefier$ cd ..
 nativefier$ npm link
 # for all version
 nativefier$ node buildProduction.js
-#for development
+#for development, without building all versions (nightly, integration, etc.), certification, building the installer, & moving everything each time
 nativefier$ nativefier --name "Redkix localhost" "http://0.0.0.0:9000/" --icon "assets/Dev.icns" --counter --maximize
 ```
 
