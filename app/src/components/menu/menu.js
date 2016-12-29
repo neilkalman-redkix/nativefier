@@ -130,7 +130,7 @@ function createMenu({nativefierVersion, appQuit, zoomIn, zoomOut, goBack, goForw
             role: 'help',
             submenu: [
                 {
-                    label: `Redkix Desktop BETA v1.0.0`,
+                    label: `Redkix Desktop BETA v${nativefierVersion}`,
                     click: () => {
                         shell.openExternal('http://redkix.com/');
                     }
