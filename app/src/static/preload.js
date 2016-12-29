@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 ipcRenderer.on('params', (event, message) => {
     const appArgs = JSON.parse(message);
     console.log('nativefier.json', appArgs);
+    window.rxWrapperArgs = appArgs;
 });
 
 ipcRenderer.on('change-zoom', (event, message) => {
