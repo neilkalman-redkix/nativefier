@@ -10,10 +10,10 @@ var versionArray = redkixNativefierInfo.version.split('.');
 var MAJOR_VERSION = versionArray[0];
 var MINOR_VERSION = versionArray[1];
 var BUILD_VERSION = versionArray[2];
+console.log(['VERSION ', redkixNativefierInfo.version].join('').bgMagenta.black);
 
 if (isWindows) {
     console.log('Building for Windows x32'.bgCyan.black);
-    console.log(['VERSION ', redkixNativefierInfo.version].join('').bgMagenta.black);
 
     var rcedit = require('rcedit');
 
