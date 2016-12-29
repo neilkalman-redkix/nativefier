@@ -13,9 +13,9 @@ const ZOOM_INTERVAL = 0.1;
 
 const loginWidth = 555;
 const loginHeight = 655;
-const defaultWidth = 1300;
-const defaultHeight = 780;
-const minWidth = 1024;
+// const defaultWidth = 1300;
+// const defaultHeight = 780;
+const minWidth = 1074;
 const minHeight = 668;
 
 var savedWindowSize = undefined;
@@ -29,16 +29,16 @@ var savedWindowSize = undefined;
  */
 function createMainWindow(options, onAppQuit, setDockBadge) {
     const mainWindowState = windowStateKeeper({
-        defaultWidth: 1300,
-        defaultHeight: 780
+        defaultWidth: minWidth,
+        defaultHeight: minHeight
     });
 
     const mainWindow = new BrowserWindow({
         frame: !options.hideWindowFrame,
         width: mainWindowState.width,
-        minWidth: 1024,
+        minWidth: minWidth,
         height: mainWindowState.height,
-        minHeight: 668,
+        minHeight: minHeight,
         x: mainWindowState.x,
         y: mainWindowState.y,
         'auto-hide-menu-bar': !options.showMenuBar,
@@ -179,28 +179,28 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
         }
     }
 
-    ipcMain.on('logged-in', function() {
-        if (mainWindow.getSize()[0] === loginWidth && mainWindow.getSize()[1] === loginHeight) {
-            savedWindowSize = savedWindowSize || [0, 0];
-            savedWindowSize[0] = savedWindowSize[0] > minWidth ? savedWindowSize[0] : defaultWidth;
-            savedWindowSize[1] = savedWindowSize[1] > minHeight ? savedWindowSize[1] : defaultHeight;
-            mainWindow.setSize(savedWindowSize[0], savedWindowSize[1], false);
-        }
+    // ipcMain.on('logged-in', function() {
+    //     if (mainWindow.getSize()[0] === loginWidth && mainWindow.getSize()[1] === loginHeight) {
+    //         savedWindowSize = savedWindowSize || [0, 0];
+    //         savedWindowSize[0] = savedWindowSize[0] > minWidth ? savedWindowSize[0] : defaultWidth;
+    //         savedWindowSize[1] = savedWindowSize[1] > minHeight ? savedWindowSize[1] : defaultHeight;
+    //         mainWindow.setSize(savedWindowSize[0], savedWindowSize[1], false);
+    //     }
+    //
+    //     mainWindow.setResizable(true);
+    //     mainWindow.center();
+    // });
 
-        mainWindow.setResizable(true);
-        mainWindow.center();
-    });
-
-    ipcMain.on('logged-out', function() {
-        setTimeout(function(){
-            if (getCurrentUrl().indexOf('home') === -1) {
-                savedWindowSize = mainWindow.getSize();
-                mainWindow.setSize(loginWidth, loginHeight, false);
-                mainWindow.setResizable(false);
-                mainWindow.center();
-            }
-        }, 500);
-    });
+    // ipcMain.on('logged-out', function() {
+    //     setTimeout(function(){
+    //         if (getCurrentUrl().indexOf('home') === -1) {
+    //             savedWindowSize = mainWindow.getSize();
+    //             mainWindow.setSize(loginWidth, loginHeight, false);
+    //             mainWindow.setResizable(false);
+    //             mainWindow.center();
+    //         }
+    //     }, 500);
+    // });
 
     mainWindow.webContents.on('will-navigate', handleRedirect);
     mainWindow.webContents.on('new-window', handleRedirect);
