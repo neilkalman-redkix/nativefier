@@ -10,6 +10,9 @@ var versionArray = redkixNativefierInfo.version.split('.');
 var MAJOR_VERSION = versionArray[0];
 var MINOR_VERSION = versionArray[1];
 var BUILD_VERSION = versionArray[2];
+console.log('MAJOR VERSION: ' + MAJOR_VERSION);
+console.log('MINOR VERSION: ' + MINOR_VERSION);
+console.log('BUILD VERSION: ' + BUILD_VERSION);
 console.log(['VERSION ', redkixNativefierInfo.version].join('').bgMagenta.black);
 
 if (isWindows) {
