@@ -4,7 +4,10 @@
 import electron from 'electron';
 import path from 'path';
 import fs from 'fs';
-const {ipcRenderer, webFrame} = electron;
+// import watcher from 'clipboard-watch';
+// var cw = watcher;
+
+const { ipcRenderer, webFrame, clipboard } = electron;
 
 const INJECT_JS_PATH = path.join(__dirname, '../../', 'inject/inject.js');
 
@@ -17,17 +20,17 @@ function watched() {
     var loggedIn = false;
 
     vm.__defineSetter__('loggedIn', function(newValue) {
-      console.log('LOGGED IN: ' + newValue);
-      if (newValue) {
-        ipcRenderer.send('logged-in');
-      } else {
-        ipcRenderer.send('logged-out');
-      }
-      loggedIn = newValue;
+        console.log('LOGGED IN: ' + newValue);
+        if (newValue) {
+            ipcRenderer.send('logged-in');
+        } else {
+            ipcRenderer.send('logged-out');
+        }
+        loggedIn = newValue;
     });
 
     vm.__defineGetter__('loggedIn', function() {
-      return loggedIn;
+        return loggedIn;
     });
 };
 
@@ -35,24 +38,98 @@ window.forWrapper = new watched();
 
 document.addEventListener('DOMContentLoaded', () => {
     // do things
+    injectScripts();
+    updateRxClipboardDataIfNeeded();
+});
 
-    window.addEventListener('contextmenu', event => {
-        event.preventDefault();
-        const targetElement = event.srcElement;
-        const targetHref = targetElement.href;
+window.addEventListener('keydown', function(event) {
+    var Util = {
+        // http://stackoverflow.com/questions/17907445/how-to-detect-ie11#comment30165888_17907562
+        // by rg89
+        isIE: ((navigator.appName === 'Microsoft Internet Explorer') || ((navigator.appName === 'Netscape') && (new RegExp('Trident/.*rv:([0-9]{1,}[.0-9]{0,})').exec(navigator.userAgent) !== null))),
 
-        if (!targetHref) {
-            ipcRenderer.once('contextMenuClosed', () => {
-                clickSelector(event.target);
-                ipcRenderer.send('cancelNewWindowOverride');
-            });
+        isEdge: (/Edge\/\d+/).exec(navigator.userAgent) !== null,
+
+        // if firefox
+        isFF: (navigator.userAgent.toLowerCase().indexOf('firefox') > -1),
+
+        // http://stackoverflow.com/a/11752084/569101
+        isMac: (window.navigator.platform.toUpperCase().indexOf('MAC') >= 0),
+
+        // https://github.com/jashkenas/underscore
+        // Lonely letter MUST USE the uppercase code
+        keyCode: {
+            BACKSPACE: 8,
+            TAB: 9,
+            ENTER: 13,
+            ESCAPE: 27,
+            SPACE: 32,
+            DELETE: 46,
+            K: 75, // K keycode, and not k
+            M: 77,
+            V: 86,
+            C: 67
+        }
+    };
+
+    function isMetaCtrlKey(event) {
+        if ((Util.isMac && event.metaKey) || (!Util.isMac && event.ctrlKey)) {
+            return true;
         }
 
-        ipcRenderer.send('contextMenuOpened', targetHref);
-    }, false);
+        return false;
+    }
 
-    injectScripts();
+    function getKeyCode(event) {
+        var keyCode = event.which;
+
+        // getting the key code from event
+        if (null === keyCode) {
+            keyCode = event.charCode !== null ? event.charCode : event.keyCode;
+        }
+
+        return keyCode;
+    }
+
+    function isKey(event, keys) {
+        var keyCode = getKeyCode(event);
+
+        // it's not an array let's just compare strings!
+        if (false === Array.isArray(keys)) {
+            return keyCode === keys;
+        }
+
+        if (-1 === keys.indexOf(keyCode)) {
+            return false;
+        }
+
+        return true;
+    }
+    // if it's not Ctrl+C, do nothing
+    if (!(isKey(event, Util.keyCode.C) && isMetaCtrlKey(event))) {
+        console.debug('no copy action found, aborting', event, getKeyCode(event), isMetaCtrlKey(event));
+        return;
+    }
+
+    var copiedText = window.getSelection().toString();
+
+    console.debug('copied text: ', copiedText);
+
+    window.rxClipboardData = copiedText;
 });
+
+window.addEventListener('focus', function(event) {
+    updateRxClipboardDataIfNeeded();
+});
+
+function updateRxClipboardDataIfNeeded() {
+    var clipboardText = clipboard.readText();
+
+    if (!window.rxClipboardData || window.rxClipboardData !== clipboardText) {
+        console.debug('updating clipboard data', clipboardText);
+        window.rxClipboardData = clipboardText;
+    }
+}
 
 ipcRenderer.on('params', (event, message) => {
     const appArgs = JSON.parse(message);
