@@ -25,7 +25,7 @@ if (isWindows) {
     var buildIntegration = 'nativefier --name "Redkix Integration" "https://int.redkix.com/" --icon "assets/Integration.ico" --counter --maximize --arch=ia32';
     var buildNightly = 'nativefier --name "Redkix Nightly" "https://nightly.redkix.com/" --icon "assets/Dev.ico" --counter --maximize --arch=ia32';
     var buildLocalhost = 'nativefier --name "Redkix localhost" "http://0.0.0.0:9000/" --icon "assets/Dev.ico" --counter --maximize --arch=ia32';
-    var buildDebug = 'nativefier --name "Redkix DEBUG" "http://debug.redkix.com/" --icon "assets/debug.ico" --counter --maximize --arch=ia32';
+    var buildDebug = 'nativefier --name "Redkix DEBUG" "https://debug.redkix.com/" --icon "assets/debug.ico" --counter --maximize --arch=ia32';
 
     console.log('BUILD PHASE STARTED'.black.bgCyan);
 
@@ -192,7 +192,7 @@ if (isWindows) {
     var buildIntegration = 'nativefier --name "Redkix Integration" "https://int.redkix.com/" --icon "assets/Integration.icns" --counter --maximize';
     var buildNightly = 'nativefier --name "Redkix Nightly" "https://nightly.redkix.com/" --icon "assets/Dev.icns" --counter --maximize';
     var buildLocalhost = 'nativefier --name "Redkix localhost" "http://0.0.0.0:9000/" --icon "assets/Dev.icns" --counter --maximize';
-    var buildDebug = 'nativefier --name "Redkix DEBUG" "http://debug.redkix.com/" --icon "assets/debug.icns" --counter --maximize';
+    var buildDebug = 'nativefier --name "Redkix DEBUG" "https://debug.redkix.com/" --icon "assets/debug.icns" --counter --maximize';
 
     console.log('BUILD LATEST NATIVEFIER AND CREATE GLOBAL VARIABLE'.black.bgRed);
 // exec('npm run dev-up');
