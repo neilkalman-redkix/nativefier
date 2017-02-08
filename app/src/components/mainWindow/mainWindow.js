@@ -11,6 +11,8 @@ const {isOSX, linkIsInternal, getCssToInject} = helpers;
 
 const ZOOM_INTERVAL = 0.1;
 
+const NO_CONNECTION_HTML = 'file://' + path.join(__dirname, '/static/noConnection/lost-connection.html');
+
 const loginWidth = 555;
 const loginHeight = 655;
 // const defaultWidth = 1300;
@@ -201,9 +203,29 @@ function createMainWindow(options, onAppQuit, setDockBadge) {
     //         }
     //     }, 500);
     // });
+    //
+    var _isRedkixLoaded = true;
 
     mainWindow.webContents.on('will-navigate', handleRedirect);
     mainWindow.webContents.on('new-window', handleRedirect);
+    ipcMain.on('is-redkix-loaded', function(event, isRedkix) {
+      _isRedkixLoaded = isRedkix;
+    });
+
+    setInterval(function() {
+      checkInternet(function(isConnected) {
+        var currentUrl = getCurrentUrl();
+        var isAlreadyOfflineScreen = currentUrl === NO_CONNECTION_HTML.replace(/\s/g, '%20');
+        if (!_isRedkixLoaded && !isConnected && !isAlreadyOfflineScreen) {
+          loadOfflinePage(mainWindow);
+        }
+
+        if (!_isRedkixLoaded && isConnected) {
+          // connected to the internet. reload redkix
+          mainWindow.loadURL(options.targetUrl);
+        }
+      });
+    }, 5000);
 
     return mainWindow;
 }
@@ -222,6 +244,24 @@ function maybeHideWindow(window, event) {
         window.hide();
     }
     // will close the window on other platforms
+}
+
+function loadOfflinePage(mainWindow, loginCallback) {
+    mainWindow.loadURL(NO_CONNECTION_HTML);
+}
+
+function checkInternet(cb) {
+    require('dns').lookup('google.com',function(err) {
+        if (err && err.code == "ENOTFOUND") {
+            cb(false);
+        } else {
+            cb(true);
+        }
+    })
+}
+
+function isOnline() {
+    return navigator.onLine;
 }
 
 export default createMainWindow;

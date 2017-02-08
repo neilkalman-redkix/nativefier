@@ -1,0 +1,46 @@
+body
+{
+    font-family: 'Courier new';
+    font-size: 18px;
+    line-height: 1.5em;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+
+    cursor: default;
+
+    color: #d3d7de;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.code-area
+{
+    width: 320px;
+    margin: 15px;
+    padding: 15px;
+
+    border-radius: 10px;
+    background: #19293a;
+}
+
+.code-area > span
+{
+    display: block;
+}
+
+.description
+{
+    max-width: 485px;
+    margin: 10px;
+
+    text-align: center;
+
+    color: black;
+}
