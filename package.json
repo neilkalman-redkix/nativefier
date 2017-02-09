@@ -1,6 +1,6 @@
 {
   "name": "redkix-nativefier",
-  "version": "1.0.20",
+  "version": "1.0.9",
   "description": "Wrap web apps natively",
   "keywords": [
     "desktop",
