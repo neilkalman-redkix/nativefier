@@ -59,7 +59,7 @@ ipcRenderer.on('params', (event, message) => {
     console.log('nativefier.json', appArgs);
     window.rxWrapperArgs = appArgs;
 
-    var element = document.getElementsByClassName('rx-update-redkix-overlay')[0];
+    var element = document.getElementsById('rx-accessibility')[0];
     var isRedkixLoaded = element ? true : false;
     ipcRenderer.send('is-redkix-loaded', isRedkixLoaded);
 });
